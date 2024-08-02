@@ -31,5 +31,19 @@ public class ObjectsController : MonoBehaviour
                 spriteRenderer.sortingOrder = 17;
             }
         }
+
+        if (collision.gameObject.tag == "Enemy")
+        {
+            GameObject enemy = collision.gameObject;
+            //Debug.Log("EM CONTATO");
+            if (enemy.transform.position.y < transform.position.y)
+            {
+                spriteRenderer.sortingOrder = 0;
+            }
+            else
+            {
+                spriteRenderer.sortingOrder = 17;
+            }
+        }
     }
 }

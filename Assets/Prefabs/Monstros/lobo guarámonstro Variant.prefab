@@ -204,6 +204,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: "lobo guar\xE1monstro Variant"
       objectReference: {fileID: 0}
+    - target: {fileID: 3134259746071725550, guid: 063465dcf2adc8c4f9ed032b92ab7ca7, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
+      objectReference: {fileID: 0}
     - target: {fileID: 3506398862710549875, guid: 063465dcf2adc8c4f9ed032b92ab7ca7, type: 3}
       propertyPath: m_MaskInteraction
       value: 1
@@ -451,6 +455,7 @@ MonoBehaviour:
   - {fileID: 4116050753418211590}
   enemyShadowSprite: {fileID: 2904622158396893746}
   enemyEyesSprite: {fileID: 2718525680664605820}
+  enemyEyesInsideMask: {fileID: 0}
   gameController: {fileID: 0}
   timeUp: 0
   playerOutOfRange: 0

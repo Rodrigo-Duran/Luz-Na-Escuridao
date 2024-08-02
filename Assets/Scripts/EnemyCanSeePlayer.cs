@@ -5,7 +5,6 @@ using UnityEngine;
 public class EnemyCanSeePlayer : MonoBehaviour
 {
     [SerializeField] private EnemyBehavior enemyBehavior;
-    [SerializeField] private CircleCollider2D enemyVision;
 
     private void OnTriggerExit2D(Collider2D collision)
     {
@@ -23,9 +22,5 @@ public class EnemyCanSeePlayer : MonoBehaviour
             Debug.Log("JOGADOR NO RANGE DO INIMIGO");
             enemyBehavior.playerOutOfRange = true;
         }
-    }
-
-    void Update()
-    {
     }
 }

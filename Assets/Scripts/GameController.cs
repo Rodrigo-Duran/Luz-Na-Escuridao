@@ -13,7 +13,7 @@ public class GameController : MonoBehaviour
     // Lanterna
     [SerializeField] private SlidersController flashlightBatterySliderController;
     [SerializeField] private FlashLightLevelControl flashlightLevelController;
-    [SerializeField] private float flashlightTotalBattery = 100f;
+    [SerializeField] private float flashlightTotalBattery = 400f;
     [SerializeField] private float flashlightActualBattery;
 
     //Sprint
@@ -31,7 +31,7 @@ public class GameController : MonoBehaviour
 
     public static GameController Instance;
 
-    [SerializeField] private float batteryPackIncrease = 20;
+    [SerializeField] private float batteryPackIncrease = 80f;
 
     //Teste
     [SerializeField] private Image HUDImage;
@@ -40,9 +40,9 @@ public class GameController : MonoBehaviour
 
     public static bool gameIsPaused;
 
-    [SerializeField] GameObject hintImage;
+    //[SerializeField] GameObject hintImage;
 
-    [SerializeField] GameObject pauseImage;
+    [SerializeField] GameObject pausePanel;
 
     // Audio
     [SerializeField] private List<AudioSource> audioSourceList;
@@ -81,21 +81,21 @@ public class GameController : MonoBehaviour
             }
 
             // Se a bateria estiver abaixo de 20, o nível de bateria é setado pra 1
-            else if (flashlightActualBattery < 20)
+            else if (flashlightActualBattery < 100)
             {
                 flashlightLevelController._lightLevel = 1;
                 HUDImage.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
             }
 
             // Se a bateria estiver abaixo de 60, o nível de bateria é setado pra 2
-            else if (flashlightActualBattery < 60)
+            else if (flashlightActualBattery < 280)
             {
                 flashlightLevelController._lightLevel = 2;
                 HUDImage.transform.localScale = new Vector3(0.65f, 0.65f, 0.65f);
             }
 
             // Se a bateria estiver abaixo ou igual a 100, o nível de bateria é setado pra 3
-            else if (flashlightActualBattery <= 100)
+            else if (flashlightActualBattery <= 400)
             {
                 flashlightLevelController._lightLevel = 3;
                 HUDImage.transform.localScale = new Vector3(0.8f, 0.8f, 0.8f);
@@ -155,10 +155,10 @@ public class GameController : MonoBehaviour
             PauseGame();
         }
 
-        if (hintImage.activeInHierarchy && Input.anyKeyDown)
+        /*if (hintImage.activeInHierarchy && Input.anyKeyDown)
         {
             hintImage.SetActive(false);
-        }
+        }*/
         
         
     }
@@ -220,7 +220,7 @@ public class GameController : MonoBehaviour
     {
         if((flashlightTotalBattery - flashlightActualBattery) < batteryPackIncrease)
         {
-            flashlightActualBattery = 100;
+            flashlightActualBattery = 400;
             //flashlightBatterySliderController.UpdateSliderValue(flashlightActualBattery, flashlightTotalBattery);
         }
 
@@ -237,13 +237,13 @@ public class GameController : MonoBehaviour
         if (!gameIsPaused)
         {
             Time.timeScale = 0f;
-            pauseImage.SetActive(true);
+            pausePanel.SetActive(true);
             gameIsPaused = true;
         }
         else
         {
             Time.timeScale = 1f;
-            pauseImage.SetActive(false);
+            pausePanel.SetActive(false);
             gameIsPaused = false;
         }
     }

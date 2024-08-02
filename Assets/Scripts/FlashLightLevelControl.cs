@@ -8,6 +8,8 @@ public class FlashLightLevelControl : MonoBehaviour
     #region Variables
     // Referencias dos objetos de niveis de luz
     [SerializeField] GameObject lowLight, mediumLight, highLight;
+    [SerializeField] GameObject darkVision;
+
     // Variavel para saber o nivel da luz atual
     private int lightLevel;
     public int _lightLevel
@@ -15,6 +17,7 @@ public class FlashLightLevelControl : MonoBehaviour
         get { return lightLevel; }
         set { lightLevel = value; }
     }
+
     // Variavel para saber o nivel da luz atual
     private bool flashLightIsActive;
     public bool _flashLightIsActive
@@ -22,6 +25,7 @@ public class FlashLightLevelControl : MonoBehaviour
         get { return flashLightIsActive; }
         set { flashLightIsActive = value; }
     }
+
     // Variavel para saber se pode interagir com a lanterna
     private bool canInteractWithFlashlight;
     public bool _canInteractWithFlashlight
@@ -33,6 +37,9 @@ public class FlashLightLevelControl : MonoBehaviour
     // AUDIO
     [SerializeField] private AudioSource playerSourceUnique;
     [SerializeField] private AudioClip turnOn, turnOff;
+
+    // HUD
+    [SerializeField] private GameObject flashlightOn, flashlightOff;
 
     #endregion
 
@@ -71,7 +78,7 @@ public class FlashLightLevelControl : MonoBehaviour
         if (!GameController.gameIsPaused)
         {
             // Se o player apertar o botão esquerdo do mouse e puder interagir com a lanterna
-            if (Input.GetButtonDown("Fire1") && canInteractWithFlashlight)
+            if (Input.GetMouseButtonDown(0) && canInteractWithFlashlight)
             {
                 // Se a lanterna estiver ligada
                 if (flashLightIsActive)
@@ -81,9 +88,14 @@ public class FlashLightLevelControl : MonoBehaviour
                     flashLightIsActive = false;
                     // Nivel de luz setado para 0
                     lightLevel = 0;
+                    //DarkVision ativa
+                    darkVision.SetActive(true);
                     // Tocar audio
                     playerSourceUnique.clip = turnOff;
                     playerSourceUnique.Play();
+                    //Alterar a imagem da lanterna na HUD (Desligada)
+                    flashlightOn.SetActive(false);
+                    flashlightOff.SetActive(true);
                 }
                 // Se a lanterna estiver desligada
                 else
@@ -91,9 +103,14 @@ public class FlashLightLevelControl : MonoBehaviour
                     Debug.Log("LIGAR LANTERNA");
                     // Ligar a lanterna
                     flashLightIsActive = true;
+                    //DarkVision ativa
+                    darkVision.SetActive(false);
                     // Tocar audio
                     playerSourceUnique.clip = turnOn;
                     playerSourceUnique.Play();
+                    //Alterar a imagem da lanterna na HUD (Ligada)
+                    flashlightOff.SetActive(false);
+                    flashlightOn.SetActive(true);
                 }
             }
         }

@@ -12,6 +12,7 @@ TagManager:
   - Long Range Flashlight
   - Short Range Flashlight
   - Placa
+  - Enemy
   layers:
   - Default
   - TransparentFX

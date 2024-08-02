@@ -188,6 +188,10 @@ PrefabInstance:
       propertyPath: m_MaskInteraction
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5977366535311990962, guid: e61ef85c443b1944eaf529cbff21f71f, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 838dc7a893c0aae449c7df5b3c063faa, type: 2}
     - target: {fileID: 7135137430406091843, guid: e61ef85c443b1944eaf529cbff21f71f, type: 3}
       propertyPath: m_MaskInteraction
       value: 1
@@ -239,6 +243,10 @@ PrefabInstance:
     - target: {fileID: 8706304851437010142, guid: e61ef85c443b1944eaf529cbff21f71f, type: 3}
       propertyPath: m_Name
       value: Capimonstro Variant
+      objectReference: {fileID: 0}
+    - target: {fileID: 8706304851437010142, guid: e61ef85c443b1944eaf529cbff21f71f, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:
@@ -319,6 +327,7 @@ MonoBehaviour:
   - {fileID: 5611231933572551922}
   enemyShadowSprite: {fileID: 4473467760057838147}
   enemyEyesSprite: {fileID: 5334855478512770477}
+  enemyEyesInsideMask: {fileID: 0}
   gameController: {fileID: 0}
   timeUp: 0
   playerOutOfRange: 0

@@ -78,12 +78,17 @@ public class PlayerController : MonoBehaviour
         set { hintContent = value; }
     }
 
-    [SerializeField] TextMeshProUGUI hintText;
-    [SerializeField] GameObject hintImage;
+    //[SerializeField] TextMeshProUGUI hintText;
+    //[SerializeField] GameObject hintImage;
 
     // PLAYER HUD
     [SerializeField] GameObject playerInteractionWarning;
     [SerializeField] GameObject playerInteractImage;
+    [SerializeField] GameObject playerInteractHUDImage;
+    [SerializeField] private GameObject darkVision;
+
+    // GAME HUD
+    [SerializeField] private GameObject flashlightOn, flashlightOff;
 
     // AUDIO
     [SerializeField] private AudioSource playerSourceLoop;
@@ -94,6 +99,8 @@ public class PlayerController : MonoBehaviour
 
     private string playerAction;
     private string apoio;
+
+    
 
     #endregion
 
@@ -150,23 +157,26 @@ public class PlayerController : MonoBehaviour
             // Se estiver tendo algum input
             if (direction.x != 0 || direction.y != 0)
             {
-                // Tocar a animação de andar
-                animator.SetInteger("transition", 1);
+                
                 if (playerIsRunning)
                 {
                     playerAction = "running";
+                    // Tocar a animação de correr
+                    animator.SetInteger("transition", 2);
                 }
                 else
                 {
                     playerAction = "walking";
+                    // Tocar a animação de andar
+                    animator.SetInteger("transition", 1);
                 }
             }
             else
             {
+                playerAction = "idle";
                 // Tocar a animação idle
                 //AINDA NÃO TEMOS ANIMAÇÃO IDLE, PORTANTO VOU COLOCAR PRA DEFAULT
-                animator.SetInteger("transition", 0);
-                playerAction = "idle";
+                animator.SetInteger("transition", 3);
             }
 
             // HIDE
@@ -200,25 +210,27 @@ public class PlayerController : MonoBehaviour
             }
 
             // INTERAÇÃO COM PLACAS
-            if (Input.GetKeyDown(KeyCode.E) && playerCanInteract)
+            /*if (Input.GetKeyDown(KeyCode.E) && playerCanInteract)
             {
                 hintText.text = hintContent;
                 hintImage.SetActive(true);
                 //gameController.PauseGame();
-            }
+            }*/
 
             // INTERAÇÃO GERAL
             if (playerCanHide || playerCanInteract)
             {
                 //Debug.Log("POSSO INTERAGIR");
-                playerInteractionWarning.SetActive(true);
+                //playerInteractionWarning.SetActive(true);
                 playerInteractImage.SetActive(true);
+                playerInteractHUDImage.SetActive(true);
             }
             else
             {
                 //Debug.Log("NÃO POSSO INTERAGIR");
-                playerInteractionWarning.SetActive(false);
+                //playerInteractionWarning.SetActive(false);
                 playerInteractImage.SetActive(false);
+                playerInteractHUDImage.SetActive(false);
             }
 
             // AUDIOS
@@ -228,7 +240,9 @@ public class PlayerController : MonoBehaviour
                 switch (playerAction)
                 {
                     case "idle":
-                        playerSourceLoop.clip = audioClipsLoop[2];
+                        //playerSourceLoop.clip = audioClipsLoop[2];
+                        playerSourceLoop.clip = null;
+                        playerSourceLoop.clip = null;
                         playerSourceLoop.Play();
                         break;
 
@@ -283,6 +297,11 @@ public class PlayerController : MonoBehaviour
         playerRB.MovePosition(bushToHide.transform.position);
         // Mudando o nível da luz pra 0 por último, pois eu preciso do nível da luz antigo para ter a referencia do objeto da moita
         flashLightLevelControl._lightLevel = 0;
+        //DarkVision ativa
+        darkVision.SetActive(true);
+        //Alterar a imagem da lanterna na HUD (Desligada)
+        flashlightOn.SetActive(false);
+        flashlightOff.SetActive(true);
         yield return new WaitForSeconds(0.01f);
     }
 

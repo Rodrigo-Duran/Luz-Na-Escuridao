@@ -9,7 +9,7 @@ public class EnemyBehavior : MonoBehaviour
 {
     [SerializeField] Transform target;
     [SerializeField] List<GameObject> enemySprites;
-    [SerializeField] GameObject enemyShadowSprite, enemyEyesSprite;
+    [SerializeField] GameObject enemyShadowSprite, enemyEyesSprite, enemyEyesInsideMask;
 
     [SerializeField] GameController gameController;
 
@@ -63,11 +63,6 @@ public class EnemyBehavior : MonoBehaviour
             followingPlayer = true;
         }
 
-        //if ((!canSeePlayer) && a)
-        //{
-        //    a = false;
-        //    StartCoroutine(Waiting());
-        //}
 
         if (playerController._playerIsHidden && followingPlayer)
         {
@@ -95,6 +90,7 @@ public class EnemyBehavior : MonoBehaviour
             gameSource.Play();
             //Tocar Audio perseguição
             followingSource.mute = false;
+            enemyEyesInsideMask.SetActive(false);
             
         }
 
@@ -142,6 +138,7 @@ public class EnemyBehavior : MonoBehaviour
         yield return new WaitForSeconds(3f);
         Debug.Log("Voltando pra posição inicial");
         agent.SetDestination(enemyStartPosition);
+        enemyEyesInsideMask.SetActive(true); 
     }
 
     IEnumerator FollowTimer()
