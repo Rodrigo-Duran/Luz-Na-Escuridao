@@ -5,10 +5,16 @@ using UnityEngine.SceneManagement;
 
 public class SceneController : MonoBehaviour
 {
+    // AUDIO
+    [SerializeField] private AudioSource gameSoundEffects;
+    [SerializeField] private AudioClip dogsBark;
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("Player Interaction"))
         {
+            gameSoundEffects.clip = dogsBark;
+            gameSoundEffects.Play();
             SceneManager.LoadScene("GameWin");
         }
     }

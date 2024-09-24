@@ -236,6 +236,7 @@ public class GameController : MonoBehaviour
     {
         if (!gameIsPaused)
         {
+            //foreach (AudioSource audio in audioSourceList) audio.Stop(); // Tem que pensar um modo para parar todos os sons que estão ativos
             Time.timeScale = 0f;
             pausePanel.SetActive(true);
             gameIsPaused = true;
@@ -245,6 +246,7 @@ public class GameController : MonoBehaviour
             Time.timeScale = 1f;
             pausePanel.SetActive(false);
             gameIsPaused = false;
+            //foreach (AudioSource audio in audioSourceList) audio.Play(); // Tem que pensar um modo para retomar apenas os sons que estavam ativos
         }
     }
 
